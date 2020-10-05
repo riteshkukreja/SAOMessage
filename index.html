@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>SAO Message</title>
 	<style type="text/css">
 		body {
 			margin: 0;
@@ -131,13 +131,38 @@
 			color: #222;
 			max-height: 0;
 			animation-delay: 1s;
-			animation: show 1s ease 1 forwards;
+			animation: show 1.5s ease 1 forwards;
 		}
 
 		.message_sao .message_content span {
 			padding: 10px 20px;
 			display: block;
 			font-family: sans-serif;
+
+			-webkit-animation: fadein 1.8s; /* Safari, Chrome and Opera > 12.1 */
+			-moz-animation: fadein 1.8s; /* Firefox < 16 */
+			-ms-animation: fadein 1.8s; /* Internet Explorer */
+			-o-animation: fadein 1.8s; /* Opera < 12.1 */
+			animation: fadein 1.8s;
+		}
+
+		.message_sao.message_accepted{
+			opacity: 0;
+			-webkit-animation: fadeout 0.5s; /* Safari, Chrome and Opera > 12.1 */
+			-moz-animation: fadeout 0.5s; /* Firefox < 16 */
+			-ms-animation: fadeout 0.5s; /* Internet Explorer */
+			-o-animation: fadeout 0.5s; /* Opera < 12.1 */
+			animation: fadeout 0.5s;
+		}
+
+		@keyframes fadeout{
+			from { opacity: 1; }
+			to   { opacity: 0; }
+		}
+
+		@keyframes fadein {
+			from { opacity: 0; }
+			to   { opacity: 1; }
 		}
 
 		@keyframes show {
@@ -152,16 +177,24 @@
 </head>
 <body>
 
-	<div class="message_sao">
+	<div class="message_sao" id="message_sao">
 		<header>Alert</header>
 		<div class="message_content">
 			<span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
 		</div>
 		<div class="message_controls">
-			<div class="message_accept"></div>
+			<div class="message_accept" onclick="accept();"></div>
 			<div class="message_reject"></div>
 		</div>
-	</div>
 
+	</div>
+	<script type="text/javascript">
+		function accept(){
+			// Sword Arte Online - Notification Sound - jujujuprii
+			var audio = new Audio('SAO.mp3');
+			audio.play();				
+			document.getElementById("message_sao").classList.add("message_accepted");		
+		}
+	</script>
 </body>
 </html>
